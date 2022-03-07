@@ -114,3 +114,10 @@ class Comments(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+
+
+    def update_comment(self, user, image, comment):
+        self.user = user
+        self.image = image
+        self.comment = comment
+        self.save()
