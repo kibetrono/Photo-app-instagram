@@ -37,3 +37,16 @@ class Image(models.Model):
     def update_caption(self, caption):
         self.image_caption = caption
         self.save()
+
+    @classmethod
+    def get_image_by_id(cls, id):
+        image_res = cls.objects.get(id=id)
+        return image_res
+
+    @classmethod
+    def search_image(cls, search_term):
+        image_search = cls.objects.filter(image_name__icontains=search_term)
+        return image_search
+
+    def __str__(self):
+        return self.image_name
