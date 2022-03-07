@@ -15,4 +15,18 @@ class Image(models.Model):
     comments_number = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
 
-    
+    class Meta:
+        ordering = ['-created_on']
+
+    def save_image(self):
+        self.save()
+
+    def update_image(self, user, image_name, image_caption, image, profile, likes, comments):
+        self.user = user
+        self.image_name = image_name
+        self.image_caption = image_caption
+        self.image = image
+        self.profile = profile
+        self.likes = likes
+        self.comments = comments
+        self.save()
