@@ -104,3 +104,13 @@ class Likes(models.Model):
 
     def __str__(self):
         return self.user
+
+# comments model
+class Comments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=250)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
