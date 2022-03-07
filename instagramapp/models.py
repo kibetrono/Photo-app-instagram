@@ -126,3 +126,11 @@ class Comments(models.Model):
 
     def delete_comment(self):
         self.delete()
+
+    @classmethod
+    def get_comment_by_id(cls, id):
+        comment_result = cls.objects.get(idna=id)
+        return comment_result
+
+    def __str__(self):
+        return self.comment
