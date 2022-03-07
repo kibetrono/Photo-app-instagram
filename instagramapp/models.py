@@ -81,3 +81,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
