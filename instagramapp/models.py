@@ -70,3 +70,6 @@ class Profile(models.Model):
         self.bio = bio
         self.profile_photo = profile_photo
         self.save()
+
+    def delete_profile(self):
+        self.delete()
