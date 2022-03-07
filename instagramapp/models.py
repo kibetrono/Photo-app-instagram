@@ -30,3 +30,10 @@ class Image(models.Model):
         self.likes = likes
         self.comments = comments
         self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def update_caption(self, caption):
+        self.image_caption = caption
+        self.save()
