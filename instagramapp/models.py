@@ -73,3 +73,11 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
+
+    @classmethod
+    def filter_profile_by_user(cls, user):
+        profile_output = cls.objects.filter(user=user)
+        return profile_output
+
+    def __str__(self):
+        return self.user
