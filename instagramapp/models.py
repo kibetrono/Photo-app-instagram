@@ -61,3 +61,12 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+
+    def save_profile(self):
+        self.save()
+
+    def update_profile(self, user, bio, profile_photo):
+        self.user = user
+        self.bio = bio
+        self.profile_photo = profile_photo
+        self.save()
