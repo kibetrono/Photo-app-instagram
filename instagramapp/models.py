@@ -89,3 +89,8 @@ class Likes(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+
+    def update_likes(self, user, image):
+        self.user = user
+        self.image = image
+        self.save()
