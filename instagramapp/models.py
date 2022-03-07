@@ -52,7 +52,6 @@ class Image(models.Model):
         return self.image_name
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=1200, null=True, blank=True)
@@ -82,6 +81,7 @@ class Profile(models.Model):
     def __str__(self):
         return self.user
 
+
 class Likes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
@@ -90,7 +90,6 @@ class Likes(models.Model):
     class Meta:
         ordering = ['-created_on']
 
-    
     def save_likes(self):
         self.save()
 
@@ -104,6 +103,7 @@ class Likes(models.Model):
 
     def __str__(self):
         return self.user
+
 
 # comments model
 class Comments(models.Model):
