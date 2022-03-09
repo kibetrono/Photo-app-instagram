@@ -75,3 +75,16 @@ def uploadPicture(request):
     context = {"form": form}
     return render(request, 'instagramapp/upload_picture.html', context)
 
+
+@login_required(login_url='login')
+def my_images(request):
+    current_user = request.user
+    images = Profile.objects.filter(user_id=current_user.id).first()
+    profiles = Image.objects.filter(user_id=current_user.id)
+
+    return render(request, 'instagramapp/profile.html', {"profile": images,"images":profiles})
+
+@login_required(login_url='login')
+def each_image(request, id):
+    image = Image.objects.get(id=id)
+    return render(request, 'instagramapp/image_details.html', {'image': image})
