@@ -32,3 +32,27 @@ def registerPage(request):
     context = {'reg_form':form}
     return render(request, 'instagramapp/auth.html',context)
 
+
+def loginPage(request):
+    page='login'
+    if request.user.is_authenticated:
+        return  redirect('index')
+
+    if request.method == "POST":
+        username=request.POST.get('username').lower()
+        password=request.POST.get('password')
+        try:
+            user=User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('index')
+        else:
+            messages.error(request, 'Username OR Password does not exist')
+
+    context={'page':page}
+    return render(request, 'instagramapp/auth.html', context)
+
