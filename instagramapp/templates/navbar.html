@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+	  <div class="container-fluid ">
+		<a class="navbar-brand "  href="{% url 'index'%}">Photo App Instagram</a>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+		  <ul class="navbar-nav">
+			<li class="nav-item">
+			  <a class="nav-link active mt-1" aria-current="page" href="{% url 'index'%}">Home</a>
+			</li>
+
+		<li class="nav-item">
+					  <a class="nav-link active mt-1" aria-current="page" href="{% url 'my_images'%}">Profile</a>
+					</li>
+      <li class="nav-item">
+			  <a class="nav-link active mt-1" aria-current="page" href="{% url 'register'%}">Register</a>
+
+          </li>
+          <li class="nav-item">
+			  {% if request.user.is_authenticated%}
+			  			  <a class="nav-link active mt-1" aria-current="page" href="{% url 'logout'%}">Logout</a>
+
+			  {%else%}
+			  <a class="nav-link active mt-1" aria-current="page" href="{% url 'login'%}">Login</a>
+				{%endif%}
+              </li>
+			    <li class="nav-item pt-1">
+
+			<form class="d-flex " role="search"  action="{% url 'search' %}">
+				            <input type="text" class="form-control me-2" placeholder="Search image by name---" name="search_query">
+
+        <button class="" style="border:unset" type="submit">Search</button>
+      </form>
+              </li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+</body>
+</html>
