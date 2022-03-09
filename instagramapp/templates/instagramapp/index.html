@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{%block content%}
+<div class="container-fluid mt-1">
+                 {%for image in images%}
+
+    <div class="row main m-1">
+        <div class="col-md-12 ">
+            <div>
+               <h3 class="text-center">{{image.image_name}}</h3>
+            </div>
+                <a href="{% url 'eachimage' image.id %}">
+                    <img style="width:100%;height:30vh" src="{{image.image.url}}" alt="">
+                </a>
+                 <div class="d-flex justify-content-start mt-3">
+                    <div><a style="text-decoration:none" href="{% url 'like' image.id %}"> <i class="fa fa-heart"></i>{{image.likes_number}} likes</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <div><a style="text-decoration:none" href="{% url 'comment' image.id  %}"> <i class="fa fa-comment"></i>{{image.comments_number}} Comments</a></div>
+                </div>
+        </div>
+    </div>
+                {%endfor%}
+
+</div>
+{%endblock%}
