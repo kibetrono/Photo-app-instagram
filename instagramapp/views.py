@@ -15,3 +15,20 @@ def index(request):
     context={'images':images}
     return render(request,'instagramapp/index.html',context)
 
+def registerPage(request):
+    form=UserCreationForm()
+    if request.method == "POST":
+        form_results=UserCreationForm(request.POST)
+        if form_results.is_valid():
+            user =form_results.save(commit=False)
+            user.username=user.username.lower()
+            user.save()
+            login(request,user)
+            return redirect('index')
+
+        else:
+            messages.error(request, 'Error occured during registration')
+
+    context = {'reg_form':form}
+    return render(request, 'instagramapp/auth.html',context)
+
