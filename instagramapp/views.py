@@ -15,6 +15,7 @@ def index(request):
     context={'images':images}
     return render(request,'instagramapp/index.html',context)
 
+
 def registerPage(request):
     form=UserCreationForm()
     if request.method == "POST":
@@ -55,7 +56,6 @@ def loginPage(request):
 
     context={'page':page}
     return render(request, 'instagramapp/auth.html', context)
-
 
 def logoutUser(request):
     logout(request)
@@ -132,3 +132,21 @@ def comment(request,pk):
 
     context = {'form':form_results,'image':profile}
     return render(request,'instagramapp/comments.html',context)
+
+
+def search(request):
+    title = "Search"
+    if 'search_query' in request.GET and request.GET["search_query"]:
+        search_term = request.GET.get("search_query").lower()
+        searched_results = Image.search_image(search_term)
+
+        message = f"{search_term}"
+        context = {'message': message, 'results': searched_results, 'title': title}
+
+        return render(request, 'instagramapp/search.html', context)
+
+    else:
+        messages.error(request, "You haven't searched for any term")
+        message = "You haven't searched for any term"
+        return render(request, 'instagramapp/search.html', {"message": message})
+
