@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row mt-4">
+        <div class="col-md-3" style="border-right:2px solid black">
+             {% if profile.profile_photo %}
+                    <img style="height:30vh" src="{{profile.profile_photo.url}}" alt="" class="card-img-top">
+                    {%else%}
+                    <img style="height:30vh" src="static/img/insta.jpeg"
+                        class="card-img-top" alt="My profile picture">
+                    {% endif %}
+                    <div class="card-body text-center">
+
+                        <h3>Name: {{ user.username }}</h3>
+                        <p>
+                            {% if profile.bio %}
+                            <small>{{ profile.bio }}</small>
+                            {% else %}
+                            <h4>Yet to update about me</h4>
+                            {% endif %}
+                        </p>
+                        <h6>Joined on: {{ user.date_joined|date }}</h6>
+
+                    </div>
+        </div>
+        <div class="col-md-7">
+
+            <a class="btn btn-success" href="{%url 'profile'%} ">Add Images</a><br>
+                                    {% for image in images %}
+                    <a href="">
+                            <img style="width:50%;height:30vh" src="{{ image.image.url }}" class="card-img-tops mt-3" alt="Image">
+
+                    </a>
+                             {% empty %}
+                    <div class="alert alert-info" role="alert">
+                        No images!
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
