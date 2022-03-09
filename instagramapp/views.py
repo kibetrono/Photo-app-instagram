@@ -56,3 +56,22 @@ def loginPage(request):
     context={'page':page}
     return render(request, 'instagramapp/auth.html', context)
 
+
+def logoutUser(request):
+    logout(request)
+    return redirect('index')
+
+@login_required(login_url='login')
+def uploadPicture(request):
+
+    form = PictureUploadForm()
+    if request.method == "POST":
+        form_results = PictureUploadForm(request.POST,request.FILES)
+        if form_results.is_valid():
+
+            form_results.save()
+            return redirect('index')
+
+    context = {"form": form}
+    return render(request, 'instagramapp/upload_picture.html', context)
+
