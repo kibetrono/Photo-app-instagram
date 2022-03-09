@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container">
+    <div class="each mt-3">
+        <div class="card-bojdy">
+            <div>
+                <img style="width:50%;height:40vh" src="{{image.image.url}}" alt="">
+                <h2>Name: {{image.image_name}}</h2>
+                <h3>Caption: {{image.image_caption}}</h3>
+                <h4>Likes: {{image.likes_number}}</h4>
+                <h4>Comments: {{image.comments_number}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
