@@ -40,7 +40,7 @@ A django applications where users can upload their photos  as well as view other
 
 ## Live Link
 
-* [Click Here]() to view KibRono's Instagram
+* [Click Here](https://kibronoinstagram.herokuapp.com/) to view KibRono's Instagram
 
 
 ## Contact Information
