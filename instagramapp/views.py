@@ -88,3 +88,47 @@ def my_images(request):
 def each_image(request, id):
     image = Image.objects.get(id=id)
     return render(request, 'instagramapp/image_details.html', {'image': image})
+
+
+@login_required(login_url='login')
+def like_picture(request, id):
+    likes = Likes.objects.filter(image_id=id).first()
+    if Likes.objects.filter(image_id=id, user_id=request.user.id).exists():
+        likes.delete()
+        image = Image.objects.get(id=id)
+        if image.likes_number == 0:
+            image.likes_number = 0
+            image.save()
+        else:
+            image.likes_number -= 1
+            image.save()
+        return redirect('/')
+    else:
+        likes = Likes(image_id=id, user_id=request.user.id)
+        likes.save()
+        image = Image.objects.get(id=id)
+        image.likes_number = image.likes_number + 1
+        image.save()
+        return redirect('/')
+
+@login_required(login_url='login')
+def comment(request,pk):
+    profile = Image.objects.get(pk=pk)
+    form_results = CommentForm(request.POST,instance=profile)
+    if request.method == "POST":
+        if form_results.is_valid():
+            user = request.user
+            comment= form_results.cleaned_data['comment']
+            comment_content = Comments(user=user, image=profile, comment=comment, created_on=datetime.now())
+            comment_content.save()
+            profile.comments_number = profile.comments_number + 1
+            profile.save()
+
+            return redirect('index')
+        else:
+            print('form is invalid')
+    else:
+        form_results = CommentForm
+
+    context = {'form':form_results,'image':profile}
+    return render(request,'instagramapp/comments.html',context)
