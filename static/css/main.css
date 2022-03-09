@@ -1,0 +1,18 @@
+.main{
+width:24%;
+height:40vh;
+float:left;
+border:1px solid #ddd;
+border-radius:20px
+}
+
+nav{
+font-size:20px
+}
+
+input{
+height:50px
+}
+form{
+margin:auto
+}
